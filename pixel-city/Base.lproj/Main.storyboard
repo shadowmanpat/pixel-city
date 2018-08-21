@@ -21,15 +21,15 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azE-Fr-jcM">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSi-NJ-0Hf">
-                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSi-NJ-0Hf" userLabel="image">
+                                <rect key="frame" x="0.0" y="667" width="375" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v8r-iD-74U">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v8r-iD-74U">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DoubleTap to drop a pin and view photos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXM-3V-kPa">
-                                        <rect key="frame" x="8.5" y="25" width="359" height="21"/>
+                                        <rect key="frame" x="8.5" y="24.5" width="359" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="359" id="dZW-oT-7ku"/>
                                             <constraint firstAttribute="height" constant="21" id="trU-ev-NJs"/>
@@ -47,12 +47,12 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fze-c2-5Pe">
-                                <rect key="frame" x="305" y="597" width="50" height="50"/>
+                                <rect key="frame" x="288" y="597" width="67" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="9DO-AU-NfY"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="9DO-AU-NfY"/>
                                     <constraint firstAttribute="height" constant="50" id="O6Q-9c-COP"/>
                                 </constraints>
-                                <state key="normal" title="Button" image="locationButton"/>
+                                <state key="normal" image="locationButton"/>
                                 <connections>
                                     <action selector="centerMapBtnWasPrsd:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SIa-na-WS3"/>
                                 </connections>
@@ -60,24 +60,26 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="aSi-NJ-0Hf" firstAttribute="top" secondItem="azE-Fr-jcM" secondAttribute="bottom" id="4IG-sS-Z0F"/>
-                            <constraint firstItem="aSi-NJ-0Hf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7U7-Ih-o5t"/>
+                            <constraint firstItem="aSi-NJ-0Hf" firstAttribute="top" secondItem="azE-Fr-jcM" secondAttribute="bottom" id="6Ad-ue-9Od"/>
                             <constraint firstItem="v8r-iD-74U" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="BXn-Rj-2wC"/>
+                            <constraint firstItem="aSi-NJ-0Hf" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="1" id="Be3-eN-lZR"/>
                             <constraint firstItem="azE-Fr-jcM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Grv-vt-xQv"/>
+                            <constraint firstItem="aSi-NJ-0Hf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MXv-TG-kN3"/>
                             <constraint firstAttribute="trailing" secondItem="Fze-c2-5Pe" secondAttribute="trailing" constant="20" id="QJu-2J-9on"/>
-                            <constraint firstItem="aSi-NJ-0Hf" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="XMG-Nu-v17"/>
                             <constraint firstItem="azE-Fr-jcM" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dND-QF-Xt2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Fze-c2-5Pe" secondAttribute="bottom" constant="20" id="dTV-hz-EnX"/>
                             <constraint firstItem="v8r-iD-74U" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eJ6-tT-g4R"/>
                             <constraint firstItem="v8r-iD-74U" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="fGN-bb-LVG"/>
+                            <constraint firstItem="aSi-NJ-0Hf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fto-WF-HPl"/>
                             <constraint firstItem="azE-Fr-jcM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="jTt-FL-x66"/>
-                            <constraint firstItem="aSi-NJ-0Hf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="uPB-Zq-B5A"/>
                             <constraint firstItem="azE-Fr-jcM" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ywA-k1-NkF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="azE-Fr-jcM" id="IQF-et-8TC"/>
+                        <outlet property="mapViewBottomContraint" destination="Be3-eN-lZR" id="DsW-wd-vXa"/>
+                        <outlet property="pullupView" destination="v8r-iD-74U" id="IeL-DX-M3Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
