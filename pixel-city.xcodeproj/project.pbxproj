@@ -14,6 +14,7 @@
 		FA10157E212141770028FDB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA10157D212141770028FDB1 /* Assets.xcassets */; };
 		FA101581212141780028FDB1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA10157F212141780028FDB1 /* LaunchScreen.storyboard */; };
 		FA85BE33212AA7CE00A8A6F2 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85BE32212AA7CE00A8A6F2 /* PhotoCell.swift */; };
+		FA85BE35212BFB8600A8A6F2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85BE34212BFB8600A8A6F2 /* Constants.swift */; };
 		FADD05AB2123FA9D001568EA /* DroppablePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADD05AA2123FA9D001568EA /* DroppablePin.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		FA101580212141780028FDB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA101582212141780028FDB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA85BE32212AA7CE00A8A6F2 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		FA85BE34212BFB8600A8A6F2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FADD05AA2123FA9D001568EA /* DroppablePin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppablePin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +124,7 @@
 		FA10158B212141D90028FDB1 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				FA85BE34212BFB8600A8A6F2 /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA85BE35212BFB8600A8A6F2 /* Constants.swift in Sources */,
 				FA85BE33212AA7CE00A8A6F2 /* PhotoCell.swift in Sources */,
 				FA101579212141760028FDB1 /* MapVC.swift in Sources */,
 				FADD05AB2123FA9D001568EA /* DroppablePin.swift in Sources */,

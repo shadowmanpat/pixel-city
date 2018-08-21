@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import  CoreLocation
+import Alamofire
+import AlamofireImage
 
 class MapVC: UIViewController, UIGestureRecognizerDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -36,6 +38,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     var locationManager = CLLocationManager()
     let authorizationStatus = CLLocationManager.authorizationStatus()
     let regioRadius: Double = 1000
+    var imageUrlArray = [String]()
     
     @IBAction func centerMapBtnWasPrsd(_ sender: Any) {
         if authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse {
@@ -115,7 +118,10 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         
         let coordinateRegio = MKCoordinateRegionMakeWithDistance(touchCooordinate, regioRadius * 2, regioRadius * 2)
         mapView.setRegion(coordinateRegio, animated: true)
-        
+        print(flickerUrl(forApiKey: apiKey, withAnntiaon: annotaion, andNumperOfPhotos: 40))
+        retrieveUrl(forAnnotation: annotaion) { (true) in
+            print(self.imageUrlArray)
+        }
 //        mapView.
     }
     func removeProgressLbl() {
@@ -142,6 +148,22 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         progressLbl?.text = "12/48 Photos Loaded"
         pullupView?.addSubview(progressLbl!)
         
+    }
+    
+    func retrieveUrl(forAnnotation annotation: DroppablePin, handler: @escaping (_ status: Bool) -> ()){
+        imageUrlArray = []
+        Alamofire.request(flickerUrl(forApiKey: apiKey, withAnntiaon: annotation, andNumperOfPhotos: 40 )).responseJSON { (response) in
+            guard let json = response.result.value as? Dictionary<String, AnyObject> else {return}
+            let photosDict = json["photos"] as! Dictionary<String, AnyObject>
+            let photosDictionaryArray = photosDict["photo"] as! [Dictionary<String, AnyObject>]
+            for photo in photosDictionaryArray{
+                let postUrl = "https://farm\(photo["farm"]!).staticflickr/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg"
+                self.imageUrlArray.append(postUrl)
+            }
+            handler(true )
+            
+        }
+     
     }
 
 
