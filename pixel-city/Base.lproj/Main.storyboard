@@ -86,6 +86,55 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
+        <!--PopVC-->
+        <scene sceneID="q47-by-wc4">
+            <objects>
+                <viewController storyboardIdentifier="PopVC" id="cNN-oN-vBH" customClass="PopVC" customModule="pixel_city" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rxH-zZ-aIW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VL3-U1-F5r">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2wN-Wd-YJi">
+                                <rect key="frame" x="0.0" y="519" width="375" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double Tap to Dissmiss" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f4G-Cw-wIB">
+                                        <rect key="frame" x="92.5" y="54.5" width="190.5" height="20"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="f4G-Cw-wIB" firstAttribute="centerY" secondItem="2wN-Wd-YJi" secondAttribute="centerY" id="8UN-K8-Unv"/>
+                                    <constraint firstItem="f4G-Cw-wIB" firstAttribute="centerX" secondItem="2wN-Wd-YJi" secondAttribute="centerX" id="WSy-Wl-VHV"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="2wN-Wd-YJi" secondAttribute="bottom" constant="20" symbolic="YES" id="6tZ-DA-5G4"/>
+                            <constraint firstItem="VL3-U1-F5r" firstAttribute="top" secondItem="rxH-zZ-aIW" secondAttribute="top" id="Gw8-Kk-61r"/>
+                            <constraint firstItem="VL3-U1-F5r" firstAttribute="trailing" secondItem="hdi-VY-eSh" secondAttribute="trailing" id="LHK-bG-eeH"/>
+                            <constraint firstItem="VL3-U1-F5r" firstAttribute="bottom" secondItem="hdi-VY-eSh" secondAttribute="bottom" id="SgR-Cm-cxc"/>
+                            <constraint firstItem="VL3-U1-F5r" firstAttribute="leading" secondItem="hdi-VY-eSh" secondAttribute="leading" id="e8u-AN-YNo"/>
+                            <constraint firstItem="2wN-Wd-YJi" firstAttribute="top" secondItem="hdi-VY-eSh" secondAttribute="top" constant="499" id="hcr-8D-a0k"/>
+                            <constraint firstItem="2wN-Wd-YJi" firstAttribute="leading" secondItem="hdi-VY-eSh" secondAttribute="leading" id="kyk-mP-722"/>
+                            <constraint firstItem="hdi-VY-eSh" firstAttribute="trailing" secondItem="2wN-Wd-YJi" secondAttribute="trailing" id="lCE-hc-Z2n"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hdi-VY-eSh"/>
+                    </view>
+                    <connections>
+                        <outlet property="popImageView" destination="VL3-U1-F5r" id="uTC-KO-zeI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wWe-2t-1M9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="976.79999999999995" y="142.57871064467767"/>
+        </scene>
     </scenes>
     <resources>
         <image name="locationButton" width="67" height="67"/>

@@ -39,7 +39,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
     let authorizationStatus = CLLocationManager.authorizationStatus()
     let regioRadius: Double = 1000
     var imageUrlArray = [String]()
-    
+    var imageArray = [UIImage]()
     @IBAction func centerMapBtnWasPrsd(_ sender: Any) {
         if authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse {
             centerMapOnUserLocation()
@@ -59,7 +59,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         collectionView?.backgroundColor = UIColor.green
         
         pullupView.addSubview(collectionView!)
-        
+        registerForPreviewing(with: self, sourceView: collectionView!)
     }
 
     func addDoubleTap(){
@@ -85,6 +85,7 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
        
     }
     @objc func animateViewDown(){
+        cancelAllSessions()
         mapViewBottomContraint.constant = 0
         UIView.animate(withDuration: 0.3){
             self.view.layoutIfNeeded()
@@ -103,6 +104,11 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         // Dispose of any resources that can be recreated.
     }
     @objc func dropPin(sender: UITapGestureRecognizer){
+        imageUrlArray = []
+        imageArray = []
+        
+        collectionView?.reloadData()
+        cancelAllSessions()
         removePin()
         animateViewUp()
         removeSpinner()
@@ -119,7 +125,17 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
         let coordinateRegio = MKCoordinateRegionMakeWithDistance(touchCooordinate, regioRadius * 2, regioRadius * 2)
         mapView.setRegion(coordinateRegio, animated: true)
         print(flickerUrl(forApiKey: apiKey, withAnntiaon: annotaion, andNumperOfPhotos: 40))
-        retrieveUrl(forAnnotation: annotaion) { (true) in
+        retrieveUrl(forAnnotation: annotaion) { (finished) in
+            if finished {
+                self.retriveImages(handler: { (finished) in
+                    if finished {
+                        self.removeSpinner()
+                        self.removeProgressLbl()
+                        self.collectionView?.reloadData()
+                        //reloadCollection View
+                    }
+                })
+            }
             print(self.imageUrlArray)
         }
 //        mapView.
@@ -157,13 +173,33 @@ class MapVC: UIViewController, UIGestureRecognizerDelegate {
             let photosDict = json["photos"] as! Dictionary<String, AnyObject>
             let photosDictionaryArray = photosDict["photo"] as! [Dictionary<String, AnyObject>]
             for photo in photosDictionaryArray{
-                let postUrl = "https://farm\(photo["farm"]!).staticflickr/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg"
+                let postUrl = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg"
                 self.imageUrlArray.append(postUrl)
             }
             handler(true )
             
         }
      
+    }
+    func cancelAllSessions(){
+        Alamofire.SessionManager.default.session.getTasksWithCompletionHandler { (sessionDataTask, uploadData, downloadData) in
+            sessionDataTask.forEach({ $0.cancel() })
+            downloadData.forEach({$0.cancel()})
+        }
+    }
+    func retriveImages(handler: @escaping (_ status: Bool) -> ()){
+        imageArray = []
+        
+        for url in imageUrlArray {
+            Alamofire.request(url).responseImage { (response) in
+                guard let image  = response.result.value else { return }
+                self.imageArray.append(image)
+                self.progressLbl?.text = "\(self.imageArray.count)/40 images downloades"
+                if(self.imageArray.count == self.imageUrlArray.count){
+                    handler(true)
+                }
+            }
+        }
     }
 
 
@@ -199,12 +235,45 @@ extension MapVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //number of item in array
-        return 4
+        return imageArray.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell
-        return cell!
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCell else{return UICollectionViewCell()}
+        let imageFormIndex = imageArray[indexPath.row]
+        let imageView = UIImageView(image: imageFormIndex)
+        cell.addSubview(imageView)
+        return cell
      //   return UICollectionViewCell()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopVC else {return}
+        popVC.initData(forImage: imageArray[indexPath.row])
+        present(popVC, animated: true, completion: nil)
+    }
+    
 }
+
+extension MapVC: UIViewControllerPreviewingDelegate{
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = collectionView?.indexPathForItem(at: location), let cell = collectionView?.cellForItem(at: indexPath) else {
+            return nil
+        }
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC")as? PopVC else {return nil}
+        popVC.initData(forImage: imageArray[indexPath.row])
+        
+        previewingContext.sourceRect = cell.contentView.frame
+        return popVC
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
+    }
+    
+    
+}
+
+
+
+
+
